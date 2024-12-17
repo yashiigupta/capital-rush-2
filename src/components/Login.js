@@ -5,7 +5,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useNavigate, Link } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const Login = () => {
       });
 
       alert("Login successful!");
+      onLogin();
       navigate("/homepage");
     } catch (err) {
       alert(err.message);

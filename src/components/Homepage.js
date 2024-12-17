@@ -5,7 +5,7 @@ import chocolates from '../assets/chocolates.png';
 import { RiGlobalLine } from "react-icons/ri";
 import { BsInstagram, BsLinkedin, BsYoutube } from "react-icons/bs";
 
-function Homepage() {
+function Homepage({ onLogout }) {
   const videoRef = useRef();
   const chocolateRef1 = useRef();
   const chocolateRef2 = useRef();
@@ -30,14 +30,14 @@ function Homepage() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden w-screen h-screen px-5 pt-8 pb-10">
+    <div className="relative overflow-hidden w-screen h-screen px-5 pt-6 py-10">
       <div className='z-50 relative flex text-white font-semibold w-full justify-between'>
         <div>
           <p className='text-md font-dm-sans'>Hey ....</p>
         </div>
         <div className='flex gap-3 justify-between font-dm-sans items-center'>
           <p className='text-md tracking-wide'>A Little Chocolate Goes a Long Way... 🍬✨</p>
-          {/* <button className="text-white px-4 py-2 rounded-md bg-[#A66D45] text-sm" onClick={onLogout}>Logout</button> */}
+          <button className="text-white px-4 py-2 rounded-md bg-[#A66D45] text-sm" onClick={onLogout}>Logout</button>
         </div>
       </div>
       <video playsInline autoPlay preload="none" muted ref = {videoRef} className='absolute top-0 left-0 w-full h-full object-cover'>
