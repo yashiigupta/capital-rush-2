@@ -15,20 +15,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Signup />} />
-          <Route 
-            path="/login" 
-            element={<Login onLogin={handleLogin} />} 
-          />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
-          <Route 
-            path="/homepage" 
-            element={
-              isLoggedIn ? (
-                <Homepage onLogout={handleLogout} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            } 
+          <Route path="/homepage" element={isLoggedIn ? (<Homepage onLogout={handleLogout} />) : (<Navigate to="/login" />)} 
           />
 
           <Route path="/signup" element={<Signup />} />
