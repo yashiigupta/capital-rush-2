@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import chocoForm from '../assets/login-choc.jpg';
+import firebase from '../firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";

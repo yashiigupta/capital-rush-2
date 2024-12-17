@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import chocoForm from '../assets/signup-choc.jpeg';
+import firebase from '../firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { auth, db } from "../firebase.js";
 import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
@@ -13,11 +14,9 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      // Sign up the user
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Store user details in Firestore
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
         lastSignup: new Date().toISOString(),
