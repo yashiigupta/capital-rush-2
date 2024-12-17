@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import chocoForm from '../assets/login-choc.jpg';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { auth, db } from "../firebase.js";
 import { useNavigate, Link } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
