@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import chocoForm from '../assets/login-choc.jpg';
-import firebase from '../firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useNavigate, Link } from 'react-router-dom';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ const Login = ({ onLogin }) => {
       });
 
       alert("Login successful!");
-      onLogin();
       navigate("/homepage");
     } catch (err) {
       alert(err.message);
