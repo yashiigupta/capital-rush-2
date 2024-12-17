@@ -3,29 +3,26 @@ import chocoForm from '../assets/login-choc.jpg';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Sign in the user
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Store user details in Firestore
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
         lastLogin: new Date().toISOString(),
       });
 
       alert("Login successful!");
+      onLogin();
       navigate("/homepage");
-
     } catch (err) {
       alert(err.message);
     }
@@ -65,9 +62,12 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)} 
         />
-        <button type="submit" className='rounded-lg p-2 bg-[#81624c] font-semibold text-sm sm:text-base'>
+        <button type="submit" className='rounded-lg p-2 bg-[#81624c] font-semibold text-sm sm:text-base mb-2'>
           Log in
         </button>
+        <Link to = "/">
+          <p>Don't have an account? Sign up here</p>
+        </Link>
       </form>
     </div>
   );

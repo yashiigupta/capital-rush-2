@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import chocoForm from '../assets/signup-choc.jpeg';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -13,8 +13,8 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      // Sign in the user
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      // Sign up the user
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
       // Store user details in Firestore
@@ -33,7 +33,7 @@ const Signup = () => {
   };
 
   return (
-    <div className='h-[75%] w-full sm:w-3/4 md:w-2/3 lg:w-1/2 flex flex-col sm:flex-row rounded-md items-center justify-center mx-auto p-4 sm:p-0 bg-[#A66D45]'>
+    <div className='h-[75%] w-full sm:w-3/4 md:w-2/3 lg:w-1/2 flex rounded-md items-center justify-center mx-auto p-4 sm:p-0 bg-[#A66D45]'>
       <img 
         src={chocoForm} 
         alt="chocolate" 
@@ -44,10 +44,10 @@ const Signup = () => {
         onSubmit={handleSignup}
       >
         <h2 className='text-lg sm:text-2xl font-semibold mb-2 text-center sm:text-left'>
-          Welcome back to Le chocolat.
+          Welcome to Le chocolat.
         </h2>
         <h2 className='text-md sm:text-xl font-medium mb-8 text-center sm:text-left'>
-          Signup to your account
+          Create an account
         </h2>
         <label className='text-sm sm:text-md font-medium mb-2 block'>Email</label>
         <input 
@@ -65,9 +65,12 @@ const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)} 
         />
-        <button type="submit" className='rounded-lg p-2 bg-[#81624c] font-semibold text-sm sm:text-base'>
-          Log in
+        <button type="submit" className='rounded-lg p-2 bg-[#81624c] font-semibold text-sm sm:text-base mb-2'>
+          Sign up
         </button>
+        <Link to = "/login">
+          <p>Already have an account? Log in here</p>
+        </Link>
       </form>
     </div>
   );
